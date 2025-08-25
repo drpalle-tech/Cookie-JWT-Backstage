@@ -1,0 +1,30 @@
+﻿@model AdminViewModel
+@{
+    ViewData["Title"] = "Admin Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome Admin!</h1>
+    <br />
+    You are an admin and you can play around..
+    <br />
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Temperature</th>
+            <th>Summary</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.WeatherForecasts)
+        {
+            <tr>
+                <td>@item.Date.ToLongDateString()</td>
+                <td>@item.TemperatureC</td>
+                <td>@item.Summary</td>
+            </tr>
+        }
+    </tbody>
+</table>

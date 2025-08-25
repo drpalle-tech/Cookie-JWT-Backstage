@@ -1,0 +1,46 @@
+{
+  "version": "1.0.0",
+  "name": "under-the-hood-auth",
+  "scripts": {
+    "bump-js-versions": "node bumpJSversions",
+    "webpack-auth-build": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --progress --config Configs/dev/auth.js"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^10.4.6",
+    "@types/lodash": "^4.14.157",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-select": "^3.1.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^7.1.2",
+    "fork-ts-checker-webpack-plugin": "^7.2.13",
+    "hard-source-webpack-plugin": "^0.13.1",
+    "less": "^3.12.0",
+    "less-loader": "^12.2.0",
+    "mini-css-extract-plugin": "^1.6.2",
+    "style-loader": "^3.3.4",
+    "ts-jest": "^29.1.2",
+    "ts-loader": "^7.0.5",
+    "typescript": "^4.2.4",
+    "webpack": "^5.101.0",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-middleware": "^7.4.2",
+    "webpack-dev-server": "^5.2.2",
+    "webpack-externalize-lodash": "^1.0.1",
+    "webpack-hot-middleware": "^2.25.1",
+    "webpack-merge": "^4.2.2",
+    "webpack-notifier": "^1.8.0"
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "lodash": "^4.17.21",
+    "react": "^16.14.0",
+    "react-dom": "^16.13.1",
+    "react-select": "^3.2.0"
+  },
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
