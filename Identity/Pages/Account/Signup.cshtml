@@ -1,0 +1,36 @@
+﻿@page
+@model SignupModel
+@{
+    ViewData["Title"] = "Sign Up";
+}
+
+<h3>User Registration</h3>
+<br />
+<div>
+    <form method="post">
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div class="mb-3 row">
+            <div class="col-2">
+                <label asp-for="SignupViewModel.Email"></label>
+            </div>
+            <div class="col-5">
+                <input type="text" asp-for="SignupViewModel.Email" class="form-control" />
+                <span class="text-danger" asp-validation-for="SignupViewModel.Email"></span>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-2">
+                <label asp-for="SignupViewModel.Password"></label>
+            </div>
+            <div class="col-5">
+                <input type="password" asp-for="SignupViewModel.Password" class="form-control" />
+                <span class="text-danger" asp-validation-for="SignupViewModel.Password"></span>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-2">
+                <input type="submit" class="btn btn-primary" value="Sign up King" />
+            </div>
+        </div>
+    </form>
+</div>
