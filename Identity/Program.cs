@@ -1,4 +1,5 @@
 using Identity.Data;
+using Identity.Data.Account;
 using Identity.Services;
 using Identity.SMTP;
 using Microsoft.AspNetCore.Identity;
@@ -18,7 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 //This will take care of adding identity and defining basic constraints
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
     options.Password.RequiredLength = 8;
     options.Password.RequireDigit = true;
@@ -27,7 +28,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.User.RequireUniqueEmail = true;
 
     //To ensure email confirmation is done.
-    options.SignIn.RequireConfirmedEmail = true;
+    //Disable in local env as email confirmation click is not mandate.
+    options.SignIn.RequireConfirmedEmail = false;
 })
     //Add DB at the end as this is our store
     .AddEntityFrameworkStores<ApplicationDbContext>()

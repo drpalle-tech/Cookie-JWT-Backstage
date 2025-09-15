@@ -1,8 +1,10 @@
+using Identity.Data.Account;
 using Identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace Identity.Pages
 {
@@ -15,11 +17,11 @@ namespace Identity.Pages
 
         private readonly ILogger<SignupModel> _logger;
         //This is internal class offered by Identity nuget to have user related actions like creating, deleting etc.,
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
 
         private readonly IEmailService _emailService;
 
-        public SignupModel(ILogger<SignupModel> logger, UserManager<IdentityUser> userManager, IEmailService emailService)
+        public SignupModel(ILogger<SignupModel> logger, UserManager<User> userManager, IEmailService emailService)
         {
             _logger = logger;
             _userManager = userManager;
@@ -35,17 +37,27 @@ namespace Identity.Pages
             //Validation of email done in Program.cs using AddIdentity
 
             //Create user
-            var user = new IdentityUser
+            var user = new User
             {
                 Email = SignupViewModel.Email,
-                UserName = SignupViewModel.Email
+                UserName = SignupViewModel.Email,
             };
+            
+            //Create custom claims for the user.
+            //Could be dept or pos claim.
+            var depClaim = new Claim("Dept", SignupViewModel.Department);
+            var posClaim = new Claim("Pos", SignupViewModel.Position);
+
             //Direct user creation to the identity package.
             //Dont take any headache.
             var result = await _userManager.CreateAsync(user, SignupViewModel.Password);
 
             if (result.Succeeded)
             {
+                //Add claims to the user.
+                await _userManager.AddClaimAsync(user, depClaim);
+                await _userManager.AddClaimAsync(user, posClaim);
+
                 //To validate the user entered mail
                 //Generate a token (similar to JWT) and keep it with Identity
                 //User goes to mail and clicks on link to confirm.
@@ -90,6 +102,12 @@ namespace Identity.Pages
         [Required]
         [DataType(DataType.Password)]
         public string Password {  get; set; } = string.Empty;
+
+        [Required]
+        public string Department { get; set; } = string.Empty;
+
+        [Required]
+        public string Position { get; set; } = string.Empty;
     }
 
 }

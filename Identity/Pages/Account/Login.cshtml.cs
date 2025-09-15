@@ -1,3 +1,4 @@
+using Identity.Data.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -16,9 +17,9 @@ namespace Identity.Pages
 
         private readonly ILogger<LoginModel> _logger;
         //This is internal class offered by Identity nuget to have signup related actions like logging in, logging out.
-        private SignInManager<IdentityUser> _signInManager;
+        private SignInManager<User> _signInManager;
 
-        public LoginModel(ILogger<LoginModel> logger, SignInManager<IdentityUser> signInManager)
+        public LoginModel(ILogger<LoginModel> logger, SignInManager<User> signInManager)
         {
             _logger = logger;
             _signInManager = signInManager;

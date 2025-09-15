@@ -1,3 +1,4 @@
+using Identity.Data.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,8 +8,8 @@ namespace Identity.Pages.Account
     public class ConfirmEmailModel : PageModel
     {
         public string Message { get; set; } = string.Empty;
-        private UserManager<IdentityUser> _userManager;
-        public ConfirmEmailModel(UserManager<IdentityUser> userManager)
+        private UserManager<User> _userManager;
+        public ConfirmEmailModel(UserManager<User> userManager)
         {
             _userManager = userManager;
         }
