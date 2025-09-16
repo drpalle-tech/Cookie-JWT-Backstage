@@ -29,11 +29,13 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
     //To ensure email confirmation is done.
     //Disable in local env as email confirmation click is not mandate.
-    options.SignIn.RequireConfirmedEmail = false;
+    //Make it to true if you need to use 2FA
+    options.SignIn.RequireConfirmedEmail = true;
 })
     //Add DB at the end as this is our store
     .AddEntityFrameworkStores<ApplicationDbContext>()
     //To add token provider
+    //Must for 2FA or MFA
     .AddDefaultTokenProviders();
 
 //Similar to DpCookie in Web APP

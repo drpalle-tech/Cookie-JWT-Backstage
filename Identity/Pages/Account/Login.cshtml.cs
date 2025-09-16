@@ -35,6 +35,14 @@ namespace Identity.Pages
                 return Page();
             var result = await _signInManager.PasswordSignInAsync(LoginViewModel.Email, LoginViewModel.Password, LoginViewModel.RememberMe, false);
 
+            if (result.RequiresTwoFactor)
+            {
+                return RedirectToPage("/Account/Login2FA", new {
+                    email = LoginViewModel.Email,
+                    rememberMe = LoginViewModel.RememberMe
+                });
+            }
+
             if (result.Succeeded)
             {
                 return RedirectToPage("/Index");

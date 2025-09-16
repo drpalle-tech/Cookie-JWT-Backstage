@@ -12,9 +12,9 @@ namespace Identity.Services
             _smtpOptions = smptpOptions;
         }
 
-        public async Task SendEmailAsync(string from, string to, string subject, string body)
+        public async Task SendEmailAsync(string to, string subject, string body)
         {
-            var message = new MailMessage(from, to, subject, body);
+            var message = new MailMessage(_smtpOptions.Value.User, to, subject, body);
 
             using (var emailClient = new SmtpClient(_smtpOptions.Value.Host, _smtpOptions.Value.Port))
             {
