@@ -1,0 +1,27 @@
+﻿@page
+@model Identity.Pages.Account.AuthenticatorMFALoginModel
+@{
+}
+
+<h3>
+    Type the code from your authenticator app!
+    Lets see that bank balance..
+</h3>
+
+<form method="post">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <div class="mb-3 row">
+        <div class="col-2">
+            <label asp-for="AuthenticatorMFALoginViewModel.SecurityCode"></label>
+        </div>
+        <div class="col-5">
+            <input type="text" asp-for="AuthenticatorMFALoginViewModel.SecurityCode" class="form-control" />
+            <span class="text-danger" asp-validation-for="AuthenticatorMFALoginViewModel.SecurityCode"></span>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <div class="col-2">
+            <input type="submit" class="btn btn-primary" value="Submit" />
+        </div>
+    </div>
+</form>

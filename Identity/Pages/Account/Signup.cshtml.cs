@@ -41,7 +41,8 @@ namespace Identity.Pages
             {
                 Email = SignupViewModel.Email,
                 UserName = SignupViewModel.Email,
-                TwoFactorEnabled = true,
+                //For Email
+                //TwoFactorEnabled = true,
             };
             
             //Create custom claims for the user.
@@ -68,17 +69,17 @@ namespace Identity.Pages
                 var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                 //For now write a new page to click confirm email instead of going to email
-                //return Redirect(Url.PageLink(pageName: "/Account/ConfirmEmail",
-                //    values: new { userId = user.Id, token = confirmationToken }) ?? string.Empty);
+                return Redirect(Url.PageLink(pageName: "/Account/ConfirmEmail",
+                    values: new { userId = user.Id, token = confirmationToken }) ?? string.Empty);
 
                 //If you really want to send email and take confirmation
                 //Uses Brevo as Mail sender 3rd party service 
                 //Details of Brevo login to be provided in appsettings
                 //Once link is clicked in Email, your confirmEMail page will be displayed as redirect.
 
-                var confirmationLink = Url.PageLink(pageName: "/Account/ConfirmEmail",
-                    values: new { userId = user.Id, token = confirmationToken });
-                await _emailService.SendEmailAsync(user.Email, "Are you a human for sure?", $"Please prove you're a human {confirmationLink}");
+                //var confirmationLink = Url.PageLink(pageName: "/Account/ConfirmEmail",
+                //    values: new { userId = user.Id, token = confirmationToken });
+                //await _emailService.SendEmailAsync(user.Email, "Are you a human for sure?", $"Please prove you're a human {confirmationLink}");
 
                 return RedirectToPage("/Account/Login");
             }

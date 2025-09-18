@@ -1,0 +1,52 @@
+﻿@page
+@model Identity.Pages.Account.AuthenticatorMFASetupModel
+@{
+}
+
+<h3>
+    Step 1: Type in this key or scan QR in your authenticator app!
+</h3>
+
+<p>
+    @if (Model.AuthenticatorMFASetupViewModel.QRCode != null)
+    {
+        <img src="@string.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.AuthenticatorMFASetupViewModel.QRCode))" width="200" height="200" />
+    }
+</p>
+
+<p>@Model.AuthenticatorMFASetupViewModel.Key</p>
+
+<h3>
+    Type the code from your authenticator app!
+    Lets see that bank balance..
+</h3>
+
+<form method="post">
+    @if (Model.IsSuccess)
+    {
+        <div class="alert alert-success">
+            The authenticator is SETUP successfully! Enjoy!!
+        </div>
+    }
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <div class="mb-3 row">
+        <div class="col-2">
+            <label asp-for="AuthenticatorMFASetupViewModel.Code"></label>
+        </div>
+        <div class="col-5">
+            <input type="text" asp-for="AuthenticatorMFASetupViewModel.Code" class="form-control" />
+            <span class="text-danger" asp-validation-for="AuthenticatorMFASetupViewModel.Code"></span>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <div class="col-2">
+            <input type="submit" class="btn btn-primary" value="Verify" />
+        </div>
+    </div>
+    @* Key must be retained after post also, to ensure it stays in case of authentication failures
+    He can see the key and re start all over . *@
+    <div class="col">
+        <input type="hidden" asp-for="AuthenticatorMFASetupViewModel.Key" />
+        <input type="hidden" asp-for="AuthenticatorMFASetupViewModel.QRCode" />
+    </div>
+</form>

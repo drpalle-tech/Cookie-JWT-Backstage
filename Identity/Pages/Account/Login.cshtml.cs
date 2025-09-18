@@ -37,10 +37,16 @@ namespace Identity.Pages
 
             if (result.RequiresTwoFactor)
             {
-                return RedirectToPage("/Account/Login2FA", new {
-                    email = LoginViewModel.Email,
-                    rememberMe = LoginViewModel.RememberMe
-                });
+                //For sending code to Email in MFA 
+                //return RedirectToPage("/Account/Login2FA", new {
+                //    email = LoginViewModel.Email,
+                //    rememberMe = LoginViewModel.RememberMe
+                //});
+
+                //For sending code to AUthenticator login (not setup)
+                //Setup page to be hit manually for every user
+                //If not setup, this never hits coz result.RequiresTwoFactor will be true only after setup.
+                return RedirectToPage("/Account/AuthenticatorMFALogin", new { LoginViewModel.RememberMe });
             }
 
             if (result.Succeeded)
