@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication("DpCookie").AddCookie("DpCookie", options =>
 {
     options.Cookie.Name = "DpCookie";
-    options.ExpireTimeSpan = TimeSpan.FromSeconds(100);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
 });
 
 //Adding security policies for authorization

@@ -77,9 +77,9 @@ namespace Identity.Pages
                 //Details of Brevo login to be provided in appsettings
                 //Once link is clicked in Email, your confirmEMail page will be displayed as redirect.
 
-                //var confirmationLink = Url.PageLink(pageName: "/Account/ConfirmEmail",
-                //    values: new { userId = user.Id, token = confirmationToken });
-                //await _emailService.SendEmailAsync(user.Email, "Are you a human for sure?", $"Please prove you're a human {confirmationLink}");
+                var confirmationLink = Url.PageLink(pageName: "/Account/ConfirmEmail",
+                    values: new { userId = user.Id, token = confirmationToken });
+                await _emailService.SendEmailAsync(user.Email, "Are you a human for sure?", $"Please prove you're a human {confirmationLink}");
 
                 return RedirectToPage("/Account/Login");
             }

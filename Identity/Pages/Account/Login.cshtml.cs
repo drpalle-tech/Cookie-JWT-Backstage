@@ -38,7 +38,8 @@ namespace Identity.Pages
             if (result.RequiresTwoFactor)
             {
                 //For sending code to Email in MFA 
-                //return RedirectToPage("/Account/Login2FA", new {
+                //return RedirectToPage("/Account/Login2FA", new
+                //{
                 //    email = LoginViewModel.Email,
                 //    rememberMe = LoginViewModel.RememberMe
                 //});
